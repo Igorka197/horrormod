@@ -1,0 +1,10 @@
+{
+  "type": "horrormod:highway_type",
+  "generator": {
+    "type": "horrormod:highway_generator",
+    "biome_source": {
+      "type": "fixed",
+      "biome": "minecraft:the_void"
+    }
+  }
+}
