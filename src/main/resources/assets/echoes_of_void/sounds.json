@@ -1,0 +1,38 @@
+{
+  "screamer": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "echoes_of_void:screamer",
+        "stream": false
+      }
+    ]
+  },
+  "static_noise": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "echoes_of_void:static_noise",
+        "stream": true
+      }
+    ]
+  },
+  "whisper_footsteps": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "echoes_of_void:whisper_footsteps",
+        "stream": false
+      }
+    ]
+  },
+  "void_scream": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "echoes_of_void:void_scream",
+        "stream": true
+      }
+    ]
+  }
+}

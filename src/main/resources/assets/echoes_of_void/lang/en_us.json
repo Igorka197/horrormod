@@ -1,0 +1,11 @@
+{
+  "entity.echoes_of_void.smiling_variant": "Smiling Variant",
+  "entity.echoes_of_void.void_stalker": "Void Stalker",
+  "effect.echoes_of_void.void_curse": "Void Curse",
+  "death.attack.void_curse": "%1$s was consumed by the void",
+  "death.attack.void_curse.player": "%1$s was consumed by the void whilst fighting %2$s",
+  "echoes_of_void.subtitle.screamer": "Unearthly scream",
+  "echoes_of_void.subtitle.static": "Static noise",
+  "echoes_of_void.subtitle.footsteps": "Footsteps behind you",
+  "echoes_of_void.subtitle.void_scream": "Void wail"
+}

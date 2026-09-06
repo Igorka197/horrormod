@@ -1,0 +1,7 @@
+{
+  "entity.echoes_of_void.smiling_variant": "Улыбающийся Вариант",
+  "entity.echoes_of_void.void_stalker": "Тень из Вакуума",
+  "effect.echoes_of_void.void_curse": "Проклятие Пустоты",
+  "death.attack.void_curse": "%1$s был поглощён пустотой",
+  "death.attack.void_curse.player": "%1$s был поглощён пустотой в бою с %2$s"
+}
