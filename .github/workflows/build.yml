@@ -29,10 +29,19 @@ jobs:
 
       - name: Build mod JAR
         run: |
-          set -o pipefail
-          gradle build --no-daemon --stacktrace 2>&1 | tee build.log
+          set +e
+          gradle build --no-daemon --stacktrace --info > build.log 2>&1
+          EXIT_CODE=$?
+          echo "--- BUILD EXIT CODE: $EXIT_CODE ---"
+          echo ""
+          echo "=== LAST 150 LINES OF BUILD LOG ==="
+          tail -150 build.log
+          echo ""
+          echo "=== ERRORS FOUND ==="
+          grep -i "error\|FAILURE\|failed\|exception" build.log | grep -v "DEBUG\|INFO" | tail -30
+          exit $EXIT_CODE
 
-      - name: Save build log
+      - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
         with:
