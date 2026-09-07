@@ -28,17 +28,29 @@ jobs:
           gradle-version: '8.3'
           cache-disabled: true
 
-      - name: Debug environment
-        run: |
-          java -version 2>&1
-          echo "JAVA_HOME=$JAVA_HOME"
-          gradle --version 2>&1 | head -5
-          echo "=== build.gradle ==="
-          head -5 build.gradle
-
       - name: Build mod JAR
+        id: build
         run: |
-          gradle build --no-daemon --stacktrace 2>&1
+          set +e
+          gradle build --no-daemon --stacktrace 2>&1 | tee build.log
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+      - name: On failure — save error log
+        if: failure()
+        run: |
+          echo "## ❌ Build Failed" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          tail -100 build.log >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          
+          # Also commit the error to a file in the repo
+          tail -100 build.log > LAST_BUILD_ERROR.txt
+          echo "Error log saved at $(date)" >> LAST_BUILD_ERROR.txt
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add LAST_BUILD_ERROR.txt
+          git commit -m "ci: build error log [skip ci]" || true
+          git push || true
 
       - name: Upload JAR artifact
         if: success()
