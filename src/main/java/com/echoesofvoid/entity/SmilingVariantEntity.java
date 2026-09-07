@@ -66,10 +66,11 @@ public class SmilingVariantEntity extends HostileEntity {
     /**
      * Spawn condition: only in dark areas (light < 4), on solid ground.
      */
-    public static boolean canSpawnInDark(EntityType<SmilingVariantEntity> type,
+    public static boolean checkSmilingSpawn(EntityType<SmilingVariantEntity> type,
             net.minecraft.world.ServerWorldAccess world, SpawnReason spawnReason,
             BlockPos pos, net.minecraft.util.math.random.Random random) {
-        return world.getLightLevel(pos) < 4 && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+        return world.getLightLevel(pos) < 4
+                && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
     }
 
     @Override
@@ -216,13 +217,4 @@ public class SmilingVariantEntity extends HostileEntity {
         hasDoneScreamer = nbt.getBoolean("HasDoneScreamer");
     }
 
-    @Override
-    protected boolean shouldDropExperience() {
-        return false;
-    }
-
-    @Override
-    protected boolean shouldDropLoot() {
-        return false;
-    }
 }

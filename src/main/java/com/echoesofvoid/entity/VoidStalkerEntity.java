@@ -61,12 +61,13 @@ public class VoidStalkerEntity extends HostileEntity {
     /**
      * Spawn condition: only in caves (below Y=50) or during thunder.
      */
-    public static boolean canSpawnInCaves(EntityType<VoidStalkerEntity> type,
+    public static boolean checkVoidSpawn(EntityType<VoidStalkerEntity> type,
             net.minecraft.world.ServerWorldAccess world, SpawnReason spawnReason,
             BlockPos pos, net.minecraft.util.math.random.Random random) {
         boolean isCave = pos.getY() < 50;
         boolean isThunder = world.isThundering();
-        return (isCave || isThunder) && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+        return (isCave || isThunder)
+                && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
     }
 
     @Override
@@ -181,16 +182,6 @@ public class VoidStalkerEntity extends HostileEntity {
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
         return true;
-    }
-
-    @Override
-    protected boolean shouldDropExperience() {
-        return false;
-    }
-
-    @Override
-    protected boolean shouldDropLoot() {
-        return false;
     }
 
     @Override

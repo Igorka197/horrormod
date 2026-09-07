@@ -37,12 +37,12 @@ public class EchoesOfTheVoid implements ModInitializer {
         SpawnRestriction.register(ModEntities.SMILING_VARIANT,
                 SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                SmilingVariantEntity::canSpawnInDark);
+                SmilingVariantEntity::checkSmilingSpawn);
 
         SpawnRestriction.register(ModEntities.VOID_STALKER,
                 SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                VoidStalkerEntity::canSpawnInCaves);
+                VoidStalkerEntity::checkVoidSpawn);
 
         // Add natural spawning to biomes
         BiomeModifications.addSpawn(
