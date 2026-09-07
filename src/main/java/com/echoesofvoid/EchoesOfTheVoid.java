@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.world.Heightmap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,35 +32,24 @@ public class EchoesOfTheVoid implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.SMILING_VARIANT, SmilingVariantEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.VOID_STALKER, VoidStalkerEntity.createAttributes());
 
-        // Spawn restrictions
+        // Spawn restrictions for Smiling Variant (dark areas only)
         SpawnRestriction.register(ModEntities.SMILING_VARIANT,
                 SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 SmilingVariantEntity::checkSmilingSpawn);
-
-        SpawnRestriction.register(ModEntities.VOID_STALKER,
-                SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                VoidStalkerEntity::checkVoidSpawn);
 
         // Add natural spawning to biomes
         BiomeModifications.addSpawn(
                 BiomeSelectors.foundInOverworld(),
                 SpawnGroup.MONSTER,
                 ModEntities.SMILING_VARIANT,
-                15,  // weight
-                1,   // min group size
-                1    // max group size
-        );
+                15, 1, 1);
 
         BiomeModifications.addSpawn(
                 BiomeSelectors.foundInOverworld(),
                 SpawnGroup.MONSTER,
                 ModEntities.VOID_STALKER,
-                10,
-                1,
-                1
-        );
+                10, 1, 1);
 
         LOGGER.info("=== The darkness is watching. ===");
     }

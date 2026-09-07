@@ -2,7 +2,6 @@ package com.echoesofvoid.entity;
 
 import com.echoesofvoid.entity.ai.VoidStalkerFollowGoal;
 import com.echoesofvoid.effect.ModEffects;
-import com.echoesofvoid.registry.ModEntities;
 import com.echoesofvoid.registry.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -19,7 +18,6 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -56,18 +54,6 @@ public class VoidStalkerEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.06)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 30.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0);
-    }
-
-    /**
-     * Spawn condition: only in caves (below Y=50) or during thunder.
-     */
-    public static boolean checkVoidSpawn(EntityType<VoidStalkerEntity> type,
-            net.minecraft.world.ServerWorldAccess world, SpawnReason spawnReason,
-            BlockPos pos, net.minecraft.util.math.random.Random random) {
-        boolean isCave = pos.getY() < 50;
-        boolean isThunder = world.isThundering();
-        return (isCave || isThunder)
-                && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
     }
 
     @Override
