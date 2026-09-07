@@ -22,17 +22,23 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.3'
+          cache-disabled: true
+
       - name: Debug environment
         run: |
-          java -version
+          java -version 2>&1
           echo "JAVA_HOME=$JAVA_HOME"
-          pwd
-          ls -la
+          gradle --version 2>&1 | head -5
+          echo "=== build.gradle ==="
+          head -5 build.gradle
 
       - name: Build mod JAR
         run: |
-          chmod +x gradlew
-          ./gradlew build --no-daemon --stacktrace 2>&1
+          gradle build --no-daemon --stacktrace 2>&1
 
       - name: Upload JAR artifact
         if: success()
