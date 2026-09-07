@@ -1,17 +1,17 @@
 package com.echoesofvoid.client;
 
 import com.echoesofvoid.EchoesOfTheVoid;
+import com.echoesofvoid.client.model.SmilingVariantModel;
 import com.echoesofvoid.client.renderer.SmilingVariantRenderer;
 import com.echoesofvoid.client.renderer.VoidStalkerRenderer;
 import com.echoesofvoid.client.screen.ScreamerOverlay;
-import com.echoesofvoid.entity.SmilingVariantEntity;
 import com.echoesofvoid.registry.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.client.MinecraftClient;
 
 @Environment(EnvType.CLIENT)
 public class EchoesClient implements ClientModInitializer {
@@ -27,6 +27,11 @@ public class EchoesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // Register entity model layers
+        EntityModelLayerRegistry.registerModelLayer(
+                SmilingVariantRenderer.MODEL_LAYER,
+                SmilingVariantModel::getTexturedModelData);
+
         // Register entity renderers
         EntityRendererRegistry.register(ModEntities.SMILING_VARIANT, SmilingVariantRenderer::new);
         EntityRendererRegistry.register(ModEntities.VOID_STALKER, VoidStalkerRenderer::new);
