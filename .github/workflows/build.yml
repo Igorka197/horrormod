@@ -26,34 +26,20 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.1.1'
+          cache-disabled: true
 
       - name: Build mod JAR
         run: |
           set +e
           gradle build --no-daemon --stacktrace > build.log 2>&1
           EXIT_CODE=$?
-
-          # Write to GitHub Actions step summary
-          {
-            echo "## Build Result: $([ $EXIT_CODE -eq 0 ] && echo '✅ SUCCESS' || echo '❌ FAILURE')"
-            echo ""
-            echo "### Environment"
-            echo "- Java: $(java -version 2>&1 | head -1)"
-            echo "- Exit code: $EXIT_CODE"
-            echo ""
-            if [ $EXIT_CODE -ne 0 ]; then
-              echo "### Compilation Errors"
-              echo '```'
-              grep -E "error:|FAILURE|BUILD FAILED|Could not" build.log | head -50
-              echo '```'
-              echo ""
-              echo "### Last 80 Lines"
-              echo '```'
-              tail -80 build.log
-              echo '```'
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
-
+          echo "Exit code: $EXIT_CODE"
+          echo ""
+          echo "=== ERRORS ==="
+          grep -i "error\|FAILURE\|failed\|exception" build.log | head -30
+          echo ""
+          echo "=== LAST 80 LINES ==="
+          tail -80 build.log
           exit $EXIT_CODE
 
       - name: Upload build log
