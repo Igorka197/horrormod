@@ -5,6 +5,10 @@
 A horror mod for Minecraft **Fabric 1.20.1** that brings existential dread into your game.
 Two terrifying entities stalk the player using unique psychological horror mechanics.
 
+## ⬇️ Download
+
+**[Скачать JAR (последняя сборка)](https://github.com/Igorka197/horrormod/releases/tag/latest)**
+
 ---
 
 ## 🔦 Monsters
