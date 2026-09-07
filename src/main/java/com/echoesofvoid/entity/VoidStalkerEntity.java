@@ -63,7 +63,7 @@ public class VoidStalkerEntity extends HostileEntity {
      */
     public static boolean canSpawnInCaves(EntityType<VoidStalkerEntity> type,
             net.minecraft.world.ServerWorldAccess world, SpawnReason spawnReason,
-            BlockPos pos, java.util.Random random) {
+            BlockPos pos, net.minecraft.util.math.random.Random random) {
         boolean isCave = pos.getY() < 50;
         boolean isThunder = world.isThundering();
         return (isCave || isThunder) && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);

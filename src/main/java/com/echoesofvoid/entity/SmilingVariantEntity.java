@@ -68,7 +68,7 @@ public class SmilingVariantEntity extends HostileEntity {
      */
     public static boolean canSpawnInDark(EntityType<SmilingVariantEntity> type,
             net.minecraft.world.ServerWorldAccess world, SpawnReason spawnReason,
-            BlockPos pos, java.util.Random random) {
+            BlockPos pos, net.minecraft.util.math.random.Random random) {
         return world.getLightLevel(pos) < 4 && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
     }
 
